@@ -1,17 +1,7 @@
-if (process.argv.length < 3) {
-  console.log("Veuillez fournir une chaîne de caractères en argument.");
-} else {
-  const str = process.argv.slice(2).join(" ");
-  //   console.log("str:", str);
-  const words = str.split(" ");
-  //   console.log("words:", words);
-  const reversedWords = words.map((word) => {
-    let reversedWord = "";
-    for (let i = word.length - 1; i >= 0; i--) {
-      reversedWord += word[i];
-    }
-    return reversedWord;
-  });
-  const reversedStr = reversedWords.reverse().join(" ");
-  console.log(reversedStr);
-}
+const num1 = process.argv[2];
+const num2 = process.argv[3];
+
+var div = num1 / num2;
+var modulo = num1 % num2;
+console.log("resultat:", Math.trunc(div));
+console.log("reste:", modulo);
