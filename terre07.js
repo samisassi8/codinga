@@ -1,6 +1,8 @@
-// var expression = process.argv.slice(2);
-// console.log(expression);
+var args = process.argv.slice(2);
 
-if (process.argv.length < 3 || process.argv !== "") {
-  console.log("erreur.");
+if (args.length !== 1 || typeof args[0] !== "string") {
+  console.error("erreur.");
+} else {
+  const str = args[0];
+  console.log(str.length);
 }
