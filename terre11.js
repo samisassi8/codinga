@@ -1,33 +1,24 @@
-const hour = process.argv.slice(2);
+const time = process.argv[2];
 
-if (process.argv.length < 3) {
-  console.log("Veuillez fournir une heure au format HH:MM en argument.");
-} else {
-  const time = process.argv[2].split(":");
-  if (time.length !== 2 || isNaN(time[0]) || isNaN(time[1])) {
-    console.log("L'heure doit être au format HH:MM.");
-  } else {
-    let hour = Number(time[0]);
-    const minute = Number(time[1]);
-    if (hour > 23 || minute > 59) {
-      console.log("L'heure doit être entre 00:00 et 23:59.");
-    } else {
-      let period = "AM";
-      if (hour >= 12) {
-        period = "PM";
-      }
-      hour %= 24;
-      if (hour === 0) {
-        hour = 12;
-      } else if (hour > 12) {
-        hour -= 12;
-      }
-      if (hour === 12 && period === "AM") {
-        period = "PM";
-      } else if (hour === 12 && period === "PM") {
-        period = "AM";
-      }
-      console.log(`${hour}:${minute.toString().padStart(2, "0")}${period}`);
-    }
-  }
+const match = /^(\d{1,2}):(\d{2})(AM|PM)$/.exec(time);
+if (!match) {
+  console.error("Veuillez entrer une heure valide au format HH:MM AM/PM");
 }
+
+let hours = parseInt(match[1]);
+const minutes = parseInt(match[2]);
+const ampm = match[3];
+
+if (hours > 12 || minutes > 59) {
+  console.error("Veuillez entrer une heure valide au format HH:MM AM/PM");
+}
+
+if (ampm === "PM" && hours !== 12) {
+  hours += 12;
+} else if (ampm === "AM" && hours === 12) {
+  hours = 0;
+}
+
+console.log(
+  `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`
+);
